@@ -1,6 +1,5 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
-import classNames from "classnames";
+import { NavLink } from "react-router-dom";
 
 interface TabNavLinkProps {
 	to: string;
@@ -13,13 +12,14 @@ export function TabNavLink({
 	label,
 	exact,
 }: TabNavLinkProps): React.ReactElement {
-	const match = useRouteMatch({
-		path: to,
-		exact: exact ?? false,
-	});
 	return (
-		<li className={classNames({ "is-active": match != null })}>
-			<Link to={to}>{label}</Link>
+		<li>
+			<NavLink
+				to={to}
+				className={({ isActive }) => (isActive ? "is-active" : undefined)}
+			>
+				{label}
+			</NavLink>
 		</li>
 	);
 }
